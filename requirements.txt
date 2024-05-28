@@ -1,0 +1,6 @@
+Flask
+nltk
+pandas
+matplotlib
+NRClex
+gunicorn

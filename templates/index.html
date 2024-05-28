@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analiza sentimenta</title>
+</head>
+<body>
+    <h1>Run Script</h1>
+    <form id="uploadForm" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".csv">
+        <input type="submit" value="Upload">
+    </form>
+    <form action="/analiza_sentimenta" method="post">
+        <button type="submit">Run Script</button>
+    </form>
+    {% if output %}
+    <h2>Output:</h2>
+    <pre>{{ output }}</pre>
+    {% endif %}
+    <script>
+        document.getElementById('uploadForm').onsubmit = async function(event) {
+            event.preventDefault();  // Prevent form submission from reloading the page
+            const formData = new FormData(this);
+            const response = await fetch('/upload', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.text();
+            alert(result);  // Show the result in a pop-up alert
+        };
+    </script>
+</body>
+</html>
